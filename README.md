@@ -6,7 +6,7 @@ Use it with your own risk!
 
 ## How It Works
 
-First you choose the bopper image according to the place you are fishing at. Images are located under "media" folder.
+First you choose the bopper image according to the place you are fishing at. Images are located under "media" folder. In the code you can change it in main.py file.
 
 What the program does is basically takes a screehsot of your screen, checks if the bobber is visible or not then waits for it to go under the water. When that happens it goes and clicks the bobber.
 
