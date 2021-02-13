@@ -1,6 +1,6 @@
 # World of Warcraft Shadowlands Fishing Bot
 
-This is a fishing bot that I made for myself but then decided to make it public for people who may need the same thing. I personally haven't used this bot to fish thousands of fish but I have used it to be able to eat while watching my char fish. 
+This is a fishing bot that I made for myself but then decided to make it public for people who may need the same thing. I personally haven't used this bot to fish thousands of fish but have used it to be able to eat while watching my character fish. 
 
 Use it with your own risk!
 
