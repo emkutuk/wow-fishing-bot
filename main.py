@@ -4,7 +4,6 @@ import pyautogui
 import time
 import random
 
-
 class WoWBot(object):
     threshold = 0.70
     image = cv2.imread("media/img-04.jpg", cv2.IMREAD_UNCHANGED)
