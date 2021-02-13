@@ -19,4 +19,4 @@ What the program does is basically takes a screehsot of your screen, checks if t
 - You MAY need to upload new pictures of boppers.
 - You MAY need to change your graphic quality to 1(lowest setting).
 
-## Safe Fishing Everyone!
+### Safe Fishing Everyone!
