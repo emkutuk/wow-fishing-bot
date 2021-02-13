@@ -13,6 +13,7 @@ What the program does is basically takes a screehsot of your screen, checks if t
 ## What You Need to Make It Work
 
 - You need to be able to run python scripts.
+- You need to install required libraries.(see requirements.txt)
 - You need to place fishing skill on your action bar (bot will press '1' to fish).
 - You need to activate auto-loot.
 - You MAY need to upload new pictures of boppers.
