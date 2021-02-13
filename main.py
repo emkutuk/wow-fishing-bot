@@ -49,7 +49,7 @@ class WoWBot(object):
         pyautogui.moveTo(self.oldLocation[0] + 20, self.oldLocation[1] + 20, 0.5)
         pyautogui.rightClick()
         print("Caught the fish!")
-        pyautogui.moveTo(random.randint(0, 1920), random.randint(0, 1080),1)
+        pyautogui.moveTo(random.randint(0, pyautogui.size()[0]), random.randint(0, pyautogui.size()[1]),1)
 
     def match_found(self):
         if len(self.locations) > 0:
@@ -62,7 +62,6 @@ class WoWBot(object):
         template_image = cv2.imread("media/myscreenshot.jpg", cv2.IMREAD_UNCHANGED)
 
         result = cv2.matchTemplate(template_image, self.image, cv2.TM_CCOEFF_NORMED)
-
         self.locations = np.where(result >= self.threshold)
         self.locations = list(zip(*self.locations[::-1]))
 
