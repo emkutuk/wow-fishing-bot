@@ -58,8 +58,8 @@ class WoWBot(object):
             return False
 
     def take_screenshot(self):
-        pyautogui.screenshot("media/myscreenshot.jpg")
-        template_image = cv2.imread("media/myscreenshot.jpg", cv2.IMREAD_UNCHANGED)
+        pyautogui.screenshot(r"media/myscreenshot.jpg")
+        template_image = cv2.imread(r"media/myscreenshot.jpg", cv2.IMREAD_UNCHANGED)
 
         result = cv2.matchTemplate(template_image, self.image, cv2.TM_CCOEFF_NORMED)
         self.locations = np.where(result >= self.threshold)
