@@ -1,19 +1,22 @@
+# -*- coding: utf-8 -*-
 from cv2 import cv2
 import numpy as np
 import pyautogui
 import time
-import random
+import datetime
+from PIL import ImageGrab
+
 
 class WoWBot(object):
-    threshold = 0.70
-    image = cv2.imread("media/img-04.jpg", cv2.IMREAD_UNCHANGED)
-
+    threshold = 0.7
+    image = cv2.imread("media/img-04.jpg", cv2.IMREAD_UNCHANGED)    
     locations = []
     oldLocation = []
+    lastThrow = []
 
     def __init__(self):
         self.start_countdown()
-        while True:
+        while True:            
             self.reset_lists()
             while self.match_found() is False:
                 self.throw_pole()
@@ -23,9 +26,11 @@ class WoWBot(object):
     def reset_lists(self):
         self.locations.clear()
         self.oldLocation.clear()
+        self.lastThrow = datetime.datetime.now()
 
     def catch_fish(self):
-        print("Catching some fish...")
+        print(datetime.datetime.now().strftime(
+            '%H:%M:%S') + "  Catching some fish...")
         while not self.match_found():
             self.take_screenshot()
         self.oldLocation = [self.locations[0][0], self.locations[0][1]]
@@ -41,27 +46,41 @@ class WoWBot(object):
 
     @staticmethod
     def throw_pole():
-        print("Throwing the pole...")
+        print(datetime.datetime.now().strftime(
+            '%H:%M:%S') + "  Throwing the pole...")
         pyautogui.press("1")
         time.sleep(2)
 
     def move_mouse_to_hook(self):
-        pyautogui.moveTo(self.oldLocation[0] + 20, self.oldLocation[1] + 20, 0.5)
+        pyautogui.moveTo(
+            self.oldLocation[0] + 20,
+            self.oldLocation[1] + 20,
+            0.5)
         pyautogui.rightClick()
-        print("Caught the fish!")
-        pyautogui.moveTo(random.randint(0, pyautogui.size()[0]), random.randint(0, pyautogui.size()[1]),1)
+        print(datetime.datetime.now().strftime(
+            '%H:%M:%S') + "  Caught the fish!")
+        pyautogui.moveTo(pyautogui.size()[0] - 50, 20, 1)
 
     def match_found(self):
+        if (datetime.datetime.now() - self.lastThrow).seconds > 30:
+            print(datetime.datetime.now().strftime(
+                '%H:%M:%S') + '  float lost, retrying')
+            return False
         if len(self.locations) > 0:
             return True
         else:
             return False
 
-    def take_screenshot(self):
-        pyautogui.screenshot(r"media/myscreenshot.jpg")
-        template_image = cv2.imread(r"media/myscreenshot.jpg", cv2.IMREAD_UNCHANGED)
+    def take_screenshot(self):        
+        template_image = cv2.cvtColor(
+            np.array(
+                ImageGrab.grab()),
+            cv2.COLOR_RGB2BGR)
 
-        result = cv2.matchTemplate(template_image, self.image, cv2.TM_CCOEFF_NORMED)
+        result = cv2.matchTemplate(
+            template_image,
+            self.image,
+            cv2.TM_CCOEFF_NORMED)
         self.locations = np.where(result >= self.threshold)
         self.locations = list(zip(*self.locations[::-1]))
 
@@ -72,7 +91,8 @@ class WoWBot(object):
             print("Bot is starting in " + str(countdown))
             time.sleep(1)
             countdown -= 1
-        print("Bot has started...")
+        print(datetime.datetime.now().strftime(
+            '%H:%M:%S') + "  Bot has started...")
 
 
 WoWBot()
